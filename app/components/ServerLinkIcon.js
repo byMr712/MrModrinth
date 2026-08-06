@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 export default function ServerLinkIcon({ platform }) {
   const className = 'w-4 h-4 shrink-0 text-current opacity-80'
 

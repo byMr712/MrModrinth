@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
@@ -7,32 +11,33 @@ import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import VersionsList from '@/app/components/VersionsList'
 import IconPreload from '@/app/components/IconPreload'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
     const mod = await getMod(params.slug)
-    const url = `https://modrinth.black/mod/${params.slug}/versions`
+    const url = siteCanonical(`/mod/${params.slug}/versions`)
     return {
-      title: `${mod.title} - Версии | ModrinthProxy`,
+      title: `${mod.title} - Версии | ${SITE_NAME}`,
       description: `Все версии мода ${mod.title}. Скачать для любой версии Minecraft.`,
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
-        title: `${mod.title} - Версии | ModrinthProxy`,
+        ...(url ? { url } : {}),
+        title: `${mod.title} - Версии | ${SITE_NAME}`,
         description: `Все версии мода ${mod.title}. Скачать для любой версии Minecraft.`,
         images: mod.icon_url ? [{ url: mod.icon_url }] : [],
       },
       twitter: {
         card: 'summary',
-        title: `${mod.title} - Версии | ModrinthProxy`,
+        title: `${mod.title} - Версии | ${SITE_NAME}`,
         description: `Все версии мода ${mod.title}. Скачать для любой версии Minecraft.`,
         images: mod.icon_url ? [mod.icon_url] : [],
       },
     }
   } catch {
     return {
-      title: 'Мод не найден | ModrinthProxy',
+      title: `Мод не найден | ${SITE_NAME}`,
       description: 'Запрашиваемый мод не найден',
     }
   }

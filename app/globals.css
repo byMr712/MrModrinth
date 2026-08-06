@@ -1,3 +1,8 @@
+/* modrinth-proxy
+ * Original Copyright (C) 2025-2026 БоБоБо
+ * Modifications Copyright (C) 2026 Mr712
+ * Licensed under AGPL-3.0-or-later
+ */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -119,15 +124,15 @@
   --scrollbar: #4b5563;
   --scrollbar-hover: #6b7280;
   --shadow-color: #393d5e;
-  --color-green: #ec7fab;
-  --color-green-hover-light: #e0659f;
-  --color-green-hover-dark: #f08fbb;
+  --color-green: #1bd96a;
+  --color-green-hover-light: #17b45a;
+  --color-green-hover-dark: #3ee889;
   --color-green-hover: var(--color-green-hover-dark);
-  --color-green-rgb: 236, 127, 171;
-  --color-green-bright: #e0659f;
-  --color-green-light: #c16fff;
-  --color-green-light-rgb: 193, 111, 255;
-  --color-download-link: #ec7fab;
+  --color-green-rgb: 27, 217, 106;
+  --color-green-bright: #3ee889;
+  --color-green-light: #4ee98d;
+  --color-green-light-rgb: 78, 233, 141;
+  --color-download-link: #1bd96a;
   --color-blue-light: #a7d0ff;
   --text-primary: #ffffff;
   --text-secondary: #d1d5db;
@@ -169,15 +174,15 @@ html:not(.dark) {
   --scrollbar: #adb5bd;
   --scrollbar-hover: #868e96;
   --shadow-color: rgba(0, 0, 0, 0.1);
-  --color-green: #ec7fab;
-  --color-green-hover-light: #e0659f;
-  --color-green-hover-dark: #f08fbb;
+  --color-green: #1bd96a;
+  --color-green-hover-light: #17b45a;
+  --color-green-hover-dark: #3ee889;
   --color-green-hover: var(--color-green-hover-light);
-  --color-green-rgb: 236, 127, 171;
-  --color-green-bright: #e0659f;
-  --color-green-light: #c16fff;
-  --color-green-light-rgb: 193, 111, 255;
-  --color-download-link: #ec7fab;
+  --color-green-rgb: 27, 217, 106;
+  --color-green-bright: #3ee889;
+  --color-green-light: #4ee98d;
+  --color-green-light-rgb: 78, 233, 141;
+  --color-download-link: #1bd96a;
   --color-blue-light: #3b82f6;
   --text-primary: #212529;
   --text-secondary: #495057;
@@ -272,16 +277,6 @@ html:not(.dark) .feature {
   background: var(--bg-secondary) !important;
   border-color: var(--border-color) !important;
   box-shadow: none !important;
-}
-
-html:not(.dark) .disclaimer-badge {
-  color: #374151 !important;
-  background: linear-gradient(135deg, rgba(var(--color-green-rgb), 0.04) 0%, rgba(var(--color-green-light-rgb), 0.04) 100%);
-  border-color: rgba(var(--color-green-rgb), 0.15);
-}
-
-html:not(.dark) .disclaimer-badge a {
-  color: var(--color-green-hover-light) !important;
 }
 
 html:not(.dark) .text-gray-200 {
@@ -1710,38 +1705,6 @@ input[type="url"]:-webkit-autofill {
   animation: letter-glow 3s ease-in-out infinite;
 }
 
-.disclaimer-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.4rem 1rem;
-  background: linear-gradient(135deg, rgba(var(--color-green-rgb), 0.06) 0%, rgba(var(--color-green-light-rgb), 0.06) 100%);
-  border: 1px solid rgba(var(--color-green-rgb), 0.1);
-  border-top: none;
-  border-radius: 0 0 1rem 1rem;
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  backdrop-filter: blur(12px);
-  position: relative;
-  overflow: hidden;
-  margin-top: -1px;
-  transition: all 0.3s ease-in-out;
-}
-
-.disclaimer-badge svg {
-  color: rgba(var(--color-green-rgb), 0.6);
-  transition: color 0.3s ease-in-out;
-}
-
-.disclaimer-badge a {
-  color: var(--color-green);
-  text-decoration: underline;
-}
-
-.disclaimer-badge a:hover {
-  color: var(--color-green-bright);
-}
-
 @keyframes shimmer {
   0% {
     left: -100%;
@@ -1753,10 +1716,10 @@ input[type="url"]:-webkit-autofill {
 
 @keyframes glow-pulse-rgba27217610606 {
   0%, 100% {
-    text-shadow: 0 0 10px rgba(236, 127, 171, 0.6), 0 0 20px rgba(236, 127, 171, 0.6), 0 0 30px rgba(236, 127, 171, 0.6);
+    text-shadow: 0 0 10px rgba(27, 217, 106, 0.6), 0 0 20px rgba(27, 217, 106, 0.6), 0 0 30px rgba(27, 217, 106, 0.6);
   }
   50% {
-    text-shadow: 0 0 15px rgba(236, 127, 171, 0.8), 0 0 30px rgba(236, 127, 171, 0.8), 0 0 45px rgba(236, 127, 171, 0.6);
+    text-shadow: 0 0 15px rgba(27, 217, 106, 0.8), 0 0 30px rgba(27, 217, 106, 0.8), 0 0 45px rgba(27, 217, 106, 0.6);
   }
 }
 
@@ -2088,18 +2051,11 @@ html.no-advanced-rendering .nav-indicator {
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
   touch-action: pan-x pan-y pinch-zoom;
-  scrollbar-width: thin;
-  scrollbar-color: rgba(128, 128, 128, 0.45) transparent;
+  scrollbar-width: none;
 }
 
 .nav-links-scroll--can-scroll::-webkit-scrollbar {
-  display: block;
-  height: 4px;
-}
-
-.nav-links-scroll--can-scroll::-webkit-scrollbar-thumb {
-  border-radius: 999px;
-  background: rgba(128, 128, 128, 0.45);
+  display: none;
 }
 
 .theme-options {
@@ -2206,21 +2162,6 @@ button svg *[fill="#ec7fab"] {
   fill: var(--color-green) !important;
 }
 
-.logo-icon {
-  background-color: var(--color-green);
-  -webkit-mask: url('/icon.png?v=2') no-repeat center / contain;
-  mask: url('/icon.png?v=2') no-repeat center / contain;
-  filter: drop-shadow(0 0 8px rgba(var(--color-green-rgb), 0.5));
-}
-
-.group:hover .logo-icon {
-  filter: drop-shadow(0 0 12px rgba(var(--color-green-rgb), 0.7));
-}
-
-.logo-icon.animate-spin {
-  filter: drop-shadow(0 0 12px rgba(var(--color-green-rgb), 0.7));
-}
-
 .minecraft-players-badge {
   background-image: linear-gradient(to right, rgba(var(--color-green-rgb), 0.15), rgba(var(--color-green-light-rgb), 0.15));
   border-color: rgba(var(--color-green-rgb), 0.25);
@@ -2295,8 +2236,4 @@ button svg *[fill="#ec7fab"] {
   to {
     transform: rotate(360deg);
   }
-}
-
-html.hide-disclaimer-badge .disclaimer-badge {
-  display: none !important;
 }

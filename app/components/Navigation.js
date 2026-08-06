@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 'use client'
 
 import Link from 'next/link'
@@ -19,14 +23,11 @@ export default function Navigation() {
     if (path.startsWith('/discover/shaders') || path.startsWith('/shaders') || path.startsWith('/shader/')) return 'cyan'
     if (path.startsWith('/discover/modpacks') || path.startsWith('/modpacks') || path.startsWith('/modpack/')) return 'red'
     if (path.startsWith('/discover/plugins') || path.startsWith('/plugins') || path.startsWith('/plugin/')) return 'blue'
-    if (path.startsWith('/discover/servers') || path.startsWith('/servers') || path.startsWith('/server/')) return 'server'
-    if (path.startsWith('/app') || path.startsWith('/launcher')) return 'emerald'
     return 'modrinth-green'
   }
 
   const isActive = (path) => {
     if (path === '/') return pathname === '/'
-    if (path === '/app') return pathname.startsWith('/app') || pathname.startsWith('/launcher')
     if (path === '/discover/mods') {
       return pathname.startsWith('/discover/mods') || pathname.startsWith('/mods') || pathname.startsWith('/mod/')
     }
@@ -44,9 +45,6 @@ export default function Navigation() {
     }
     if (path === '/discover/plugins') {
       return pathname.startsWith('/discover/plugins') || pathname.startsWith('/plugins') || pathname.startsWith('/plugin/')
-    }
-    if (path === '/discover/servers') {
-      return pathname.startsWith('/discover/servers') || pathname.startsWith('/servers') || pathname.startsWith('/server/')
     }
     return pathname.startsWith(path)
   }
@@ -174,7 +172,7 @@ export default function Navigation() {
   return (
     <div
       ref={scrollRef}
-      className="nav-links-scroll hidden min-w-0 flex-1 lg:block"
+      className="nav-links-scroll hidden min-w-0 lg:block"
     >
       <div ref={navRef} className="relative flex w-max flex-nowrap items-center gap-0.5 md:gap-1">
         <div 
@@ -267,105 +265,45 @@ export default function Navigation() {
           <span>Плагины</span>
         </span>
       </Link>
-      
+
       <Link 
-        ref={el => linksRef.current['/discover/servers'] = el}
-        href="/discover/servers" 
-        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-indigo-500/10 dark:hover:bg-indigo-950/30">
-        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/discover/servers') || isActive('/servers') ? 'text-indigo-600 dark:text-indigo-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-indigo-600 dark:group-hover:text-indigo-400'}`}>
+        ref={el => linksRef.current['/whothisfile'] = el}
+        href="/whothisfile" 
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-[rgba(var(--color-green-rgb),0.08)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)]">
+        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/whothisfile') ? 'text-modrinth-green' : 'text-gray-700 dark:text-gray-300 group-hover:text-[color:var(--color-green-hover)] dark:group-hover:text-modrinth-green-light'}`}>
           <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
-            <line x1="22" x2="2" y1="12" y2="12" />
-            <path d="M5.45 5.11 2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z" />
-            <line x1="6" x2="6.01" y1="16" y2="16" />
-            <line x1="10" x2="10.01" y1="16" y2="16" />
+            <path d="M9 12h6m-6 4h6m2 5H7a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5.586a1 1 0 0 1 .707.293l5.414 5.414a1 1 0 0 1 .293.707V19a2 2 0 0 1-2 2z"></path>
           </svg>
-          <span>Серверы</span>
+          <span>Что за файл?</span>
         </span>
       </Link>
 
       <Link 
-        ref={el => linksRef.current['/app'] = el}
-        href="/app" 
-        className="group relative z-10 rounded-lg px-2.5 py-2 transition-all duration-300 whitespace-nowrap hover:bg-emerald-500/10 dark:hover:bg-emerald-950/30 md:px-4">
-        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/app') ? 'text-emerald-700 dark:text-emerald-400' : 'text-gray-700 dark:text-gray-300 group-hover:text-emerald-700 dark:group-hover:text-emerald-400'}`}>
-          <svg className="hidden sm:inline w-4 h-4" fill="currentColor" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink">
-            <g>
-              <g>
-                <path d="M477.858,8.533H34.142C15.317,8.533,0,23.851,0,42.675v281.591c0,4.71,3.823,8.533,8.533,8.533h494.933
-                  c4.71,0,8.533-3.823,8.533-8.533V42.675C512,23.851,496.683,8.533,477.858,8.533z M494.933,315.733H17.067V42.675
-                  c0-9.421,7.663-17.075,17.075-17.075h443.716c9.412,0,17.075,7.654,17.075,17.075V315.733z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M503.467,315.733H8.533c-4.71,0-8.533,3.823-8.533,8.533v42.658c0,18.825,15.317,34.142,34.142,34.142h443.716
-                  c18.825,0,34.142-15.317,34.142-34.142v-42.658C512,319.556,508.177,315.733,503.467,315.733z M494.933,366.925
-                  c0,9.421-7.663,17.075-17.075,17.075H34.142c-9.412,0-17.075-7.654-17.075-17.075V332.8h477.867V366.925z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M281.6,349.867h-51.2c-4.71,0-8.533,3.823-8.533,8.533s3.823,8.533,8.533,8.533h51.2c4.71,0,8.533-3.823,8.533-8.533
-                  S286.31,349.867,281.6,349.867z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M469.333,42.667H42.667c-4.71,0-8.533,3.823-8.533,8.533v273.067c0,4.71,3.823,8.533,8.533,8.533h426.667
-                  c4.71,0,8.533-3.823,8.533-8.533V51.2C477.867,46.49,474.044,42.667,469.333,42.667z M460.8,315.733H51.2v-256h409.6V315.733z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M366.933,452.267H145.067c-14.114,0-25.6,11.486-25.6,25.6s11.486,25.6,25.6,25.6h221.867c14.114,0,25.6-11.486,25.6-25.6
-                  S381.047,452.267,366.933,452.267z M366.933,486.4H145.067c-4.71,0-8.533-3.831-8.533-8.533s3.823-8.533,8.533-8.533h221.867
-                  c4.71,0,8.533,3.831,8.533,8.533S371.644,486.4,366.933,486.4z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M349.867,452.267c-28.314,0-42.667-20.096-42.667-59.733c0-4.71-3.823-8.533-8.533-8.533h-85.333
-                  c-4.71,0-8.533,3.823-8.533,8.533c0,39.637-14.353,59.733-42.667,59.733c-4.71,0-8.533,3.823-8.533,8.533
-                  c0,4.71,3.823,8.533,8.533,8.533h187.733c4.71,0,8.533-3.823,8.533-8.533C358.4,456.09,354.577,452.267,349.867,452.267z
-                   M203.699,452.267c10.505-11.639,16.691-28.971,17.937-51.2h68.736c1.237,22.229,7.424,39.561,17.937,51.2H203.699z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M407.757,259.959l-20.599-20.599l11.46-11.46c2.125-2.125,2.978-5.214,2.244-8.124c-0.734-2.91-2.944-5.214-5.82-6.084
-                  l-85.333-25.6c-3.012-0.905-6.263-0.077-8.482,2.142c-2.227,2.219-3.046,5.478-2.142,8.482l25.6,85.333
-                  c0.862,2.884,3.174,5.094,6.084,5.828c2.901,0.717,5.999-0.12,8.124-2.244l12.066-12.075l20.599,20.608
-                  c1.596,1.604,3.772,2.5,6.033,2.5s4.437-0.896,6.033-2.5l24.132-24.141C411.093,268.689,411.093,263.296,407.757,259.959z
-                   M377.591,278.067l-18.756-18.765c-2.176-2.176-5.026-3.26-7.876-3.26c-2.859,0-5.709,1.092-7.876,3.251l-6.161,6.161
-                  l-16.939-56.465l56.465,16.939l-6.605,6.605c-1.818,1.826-2.816,4.25-2.816,6.827c0,2.586,1.007,5.026,2.833,6.835l19.797,19.797
-                  L377.591,278.067z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M358.4,76.8H119.467c-4.71,0-8.533,3.823-8.533,8.533V128c0,4.71,3.823,8.533,8.533,8.533H358.4
-                  c4.71,0,8.533-3.823,8.533-8.533V85.333C366.933,80.623,363.11,76.8,358.4,76.8z M349.867,119.467H128v-25.6h221.867V119.467z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M221.867,170.667H153.6c-4.71,0-8.533,3.823-8.533,8.533v34.133c0,4.71,3.823,8.533,8.533,8.533h68.267
-                  c4.71,0,8.533-3.823,8.533-8.533V179.2C230.4,174.49,226.577,170.667,221.867,170.667z M213.333,204.8h-51.2v-17.067h51.2V204.8z"></path>
-              </g>
-            </g>
-            <g>
-              <g>
-                <path d="M358.4,76.8H119.467c-4.71,0-8.533,3.823-8.533,8.533v162.133c0,4.71,3.823,8.533,8.533,8.533h203.145
-                  c2.705,0,5.239-1.271,6.844-3.439c1.613-2.167,2.108-4.966,1.331-7.552l-10.803-36.019l35.968,10.795
-                  c2.586,0.777,5.385,0.282,7.543-1.331c2.167-1.604,3.439-4.147,3.439-6.844V85.333C366.933,80.623,363.11,76.8,358.4,76.8z
-                   M349.867,200.141L309.7,188.092c-3.012-0.905-6.263-0.077-8.482,2.142c-2.227,2.227-3.046,5.478-2.142,8.491l12.066,40.209H128
-                  V93.867h221.867V200.141z"></path>
-              </g>
-            </g>
+        ref={el => linksRef.current['/about'] = el}
+        href="/about" 
+        className="group relative px-2.5 md:px-4 py-2 rounded-lg transition-all duration-300 whitespace-nowrap z-10 hover:bg-[rgba(var(--color-green-rgb),0.08)] dark:hover:bg-[rgba(var(--color-green-rgb),0.1)]">
+        <span className={`text-xs md:text-sm font-semibold transition-colors flex items-center gap-1.5 ${isActive('/about') ? 'text-modrinth-green' : 'text-gray-700 dark:text-gray-300 group-hover:text-[color:var(--color-green-hover)] dark:group-hover:text-modrinth-green-light'}`}>
+          <svg className="hidden sm:inline w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <path d="M12 16v-4M12 8h.01"></path>
           </svg>
-          <span>Modrinth App</span>
+          <span>О программе</span>
         </span>
       </Link>
+
+      <span className="mx-1 h-5 w-px shrink-0 bg-gray-300/60 dark:bg-gray-700/60" aria-hidden />
+
+      <Link
+        href="/settings"
+        aria-label="Настройки"
+        title="Настройки"
+        className={`group relative flex items-center px-2.5 py-2 rounded-lg transition-all duration-300 z-10 ${pathname.startsWith('/settings') ? 'text-modrinth-green' : 'text-gray-500 dark:text-gray-400 hover:text-[color:var(--color-green-hover)] dark:hover:text-modrinth-green-light'}`}>
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" className="w-5 h-5">
+          <path d="M12.22 2h-.44a2 2 0 0 0-2 2v.18a2 2 0 0 1-1 1.73l-.43.25a2 2 0 0 1-2 0l-.15-.08a2 2 0 0 0-2.73.73l-.22.38a2 2 0 0 0 .73 2.73l.15.1a2 2 0 0 1 1 1.72v.51a2 2 0 0 1-1 1.74l-.15.09a2 2 0 0 0-.73 2.73l.22.38a2 2 0 0 0 2.73.73l.15-.08a2 2 0 0 1 2 0l.43.25a2 2 0 0 1 1 1.73V20a2 2 0 0 0 2 2h.44a2 2 0 0 0 2-2v-.18a2 2 0 0 1 1-1.73l.43-.25a2 2 0 0 1 2 0l.15.08a2 2 0 0 0 2.73-.73l.22-.39a2 2 0 0 0-.73-2.73l-.15-.08a2 2 0 0 1-1-1.74v-.5a2 2 0 0 1 1-1.74l.15-.1a2 2 0 0 0 .73-2.73l-.22-.38a2 2 0 0 0-2.73-.73l-.15.08a2 2 0 0 1-2 0l-.43-.25a2 2 0 0 1-1-1.73V4a2 2 0 0 0-2-2z"></path>
+          <circle cx="12" cy="12" r="3"></circle>
+        </svg>
+      </Link>
+
       </div>
     </div>
   )

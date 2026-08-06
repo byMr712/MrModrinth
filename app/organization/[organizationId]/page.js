@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { notFound, redirect } from 'next/navigation'
 import { getOrganization, getOrganizationProjects } from '@/lib/modrinth'
 import {
@@ -15,13 +19,14 @@ import {
 import { IconBuilding2, IconDownload, IconPackage, IconUsers } from '@/lib/icons'
 import ResourceList from '@/app/components/ResourceList'
 import OrganizationMembersSidebar from '@/app/components/OrganizationMembersSidebar'
+import { SITE_NAME } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
     const organization = await getOrganization(params.organizationId)
     if (!organization?.id) {
       return {
-        title: 'Организация не найдена | ModrinthProxy',
+        title: `Организация не найдена | ${SITE_NAME}`,
         description: 'Запрашиваемая организация не найдена',
       }
     }
@@ -32,7 +37,7 @@ export async function generateMetadata({ params }) {
       isOrganizationBlocked(organization.slug)
     ) {
       return {
-        title: 'Доступ ограничен | ModrinthProxy',
+        title: `Доступ ограничен | ${SITE_NAME}`,
         description: 'Данная организация недоступна',
       }
     }
@@ -41,10 +46,10 @@ export async function generateMetadata({ params }) {
 
     return {
       title: `${presenter.name} — Организация`,
-      description: presenter.description || `Проекты организации ${presenter.name} на ModrinthProxy`,
+      description: presenter.description || `Проекты организации ${presenter.name} на MrModrinth`,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
         title: `${presenter.name} — Организация`,
         description: presenter.description || `Проекты организации ${presenter.name}`,
@@ -53,7 +58,7 @@ export async function generateMetadata({ params }) {
     }
   } catch {
     return {
-      title: 'Организация не найдена | ModrinthProxy',
+      title: `Организация не найдена | ${SITE_NAME}`,
       description: 'Запрашиваемая организация не найдена',
     }
   }

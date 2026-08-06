@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
 import { filterModsList } from '@/lib/contentFilter'
@@ -12,6 +16,7 @@ import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
 import SearchLayoutCorrectionNote from '@/app/components/SearchLayoutCorrectionNote'
 import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
+import { SITE_NAME } from '@/lib/siteConfig'
 
 export async function generateMetadata({ searchParams }) {
   const { title, description } = buildServerCatalogSeo({ searchParams })
@@ -21,7 +26,7 @@ export async function generateMetadata({ searchParams }) {
     description,
     robots: 'all',
     openGraph: {
-      siteName: 'modrinth.black',
+      siteName: SITE_NAME,
       type: 'website',
       title,
       description,

@@ -1,3 +1,8 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
+import { SITE_NAME } from '@/lib/siteConfig'
 import { notFound } from 'next/navigation'
 import { getAuthorInfo, getAuthorProjects, formatAuthorStats, getProjectTypeDisplayName } from '@/lib/author'
 import { filterModContent, filterModsList, filterUserPublic, isUserBlocked } from '@/lib/contentFilter'
@@ -19,7 +24,7 @@ export async function generateMetadata({ params, searchParams }) {
     const author = filterUserPublic(await getAuthorInfo(params.userId))
     if (!author) {
       return {
-        title: 'Автор не найден | ModrinthProxy',
+        title: `Автор не найден | ${SITE_NAME}`,
         description: 'Запрашиваемый автор не найден',
       }
     }
@@ -39,7 +44,7 @@ export async function generateMetadata({ params, searchParams }) {
     )
   } catch {
     return {
-      title: 'Автор не найден | ModrinthProxy',
+      title: `Автор не найден | ${SITE_NAME}`,
       description: 'Запрашиваемый автор не найден',
     }
   }

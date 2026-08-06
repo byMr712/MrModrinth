@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { notFound, permanentRedirect } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
@@ -6,6 +10,7 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import MarkdownContent from '@/app/components/MarkdownContent'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
@@ -13,17 +18,17 @@ export async function generateMetadata({ params }) {
     if (mod.project_type === 'minecraft_java_server') {
       permanentRedirect(`/server/${params.slug}`)
     }
-    const url = `https://modrinth.black/mod/${params.slug}`
     const fullDescription = mod.description || `Скачать ${mod.title} для Minecraft. ${formatDownloads(mod.downloads)} загрузок. Поддержка версий: ${mod.game_versions?.slice(0, 3).join(', ')}.`
     
+    const url = siteCanonical(`/mod/${params.slug}`)
     return {
       title: `${mod.title} - Майнкрафт Мод`,
       description: fullDescription,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
+        ...(url ? { url } : {}),
         title: `${mod.title} - Майнкрафт Мод`,
         description: mod.description,
         images: mod.icon_url ? [{ url: mod.icon_url }] : [],
@@ -40,7 +45,7 @@ export async function generateMetadata({ params }) {
     }
   } catch {
     return {
-      title: 'Мод не найден | ModrinthProxy',
+      title: `Мод не найден | ${SITE_NAME}`,
       description: 'Запрашиваемый мод не найден',
     }
   }

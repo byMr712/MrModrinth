@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 'use client'
 
 import { useTheme } from 'next-themes'
@@ -82,7 +86,7 @@ export default function ThemeSwitcher() {
               Тема
             </div>
             <div className="px-3 py-1.5 text-xs text-gray-500 dark:text-gray-400 mb-2">
-              Выберите тему для ModrinthProxy на этом устройстве.
+              Выберите тему для MrModrinth на этом устройстве.
             </div>
             <div className="flex flex-col gap-1">
               {themes.map((themeOption) => (

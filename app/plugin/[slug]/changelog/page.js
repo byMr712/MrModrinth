@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
@@ -7,32 +11,33 @@ import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import IconPreload from '@/app/components/IconPreload'
 import ChangelogVersionEntries from '@/app/components/ChangelogVersionEntries'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
     const plugin = await getMod(params.slug)
-    const url = `https://modrinth.black/plugin/${params.slug}/changelog`
+    const url = siteCanonical(`/plugin/${params.slug}/changelog`)
     return {
-      title: `${plugin.title} - Изменения | ModrinthProxy`,
+      title: `${plugin.title} - Изменения | ${SITE_NAME}`,
       description: `История изменений плагина ${plugin.title}`,
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
-        title: `${plugin.title} - Изменения | ModrinthProxy`,
+        ...(url ? { url } : {}),
+        title: `${plugin.title} - Изменения | ${SITE_NAME}`,
         description: `История изменений плагина ${plugin.title}`,
         images: plugin.icon_url ? [{ url: plugin.icon_url }] : [],
       },
       twitter: {
         card: 'summary',
-        title: `${plugin.title} - Изменения | ModrinthProxy`,
+        title: `${plugin.title} - Изменения | ${SITE_NAME}`,
         description: `История изменений плагина ${plugin.title}`,
         images: plugin.icon_url ? [plugin.icon_url] : [],
       },
     }
   } catch {
     return {
-      title: 'Плагин не найден | ModrinthProxy',
+      title: `Плагин не найден | ${SITE_NAME}`,
       description: 'Запрашиваемый плагин не найден',
     }
   }

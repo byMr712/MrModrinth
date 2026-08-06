@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 'use client'
 
 import { useCallback, useEffect, useRef, useState } from 'react'
@@ -7,9 +11,9 @@ import { compressVersionRanges, formatFileSize } from '@/lib/modrinth'
 import { normalizeContentRoute } from '@/lib/contextualVersions'
 import { getProjectTypeDisplayName } from '@/lib/author'
 import { compareMinecraftVersionsDesc } from '@/lib/minecraftVersionSort'
-import CopyButton from '../../components/CopyButton'
-import { DownloadIconButton } from '../../components/DownloadModalParts'
-import RelativeTime from '../../components/RelativeTime'
+import CopyButton from '@/app/components/CopyButton'
+import { DownloadIconButton } from '@/app/components/DownloadModalParts'
+import RelativeTime from '@/app/components/RelativeTime'
 
 const VERSION_CHANNEL_LABELS = {
   release: 'Релиз',

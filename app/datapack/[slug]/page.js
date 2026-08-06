@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
@@ -6,21 +10,22 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import MarkdownContent from '@/app/components/MarkdownContent'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
     const pack = await getMod(params.slug)
-    const url = `https://modrinth.black/datapack/${params.slug}`
     const fullDescription = pack.description || `Скачать ${pack.title} для Minecraft. ${formatDownloads(pack.downloads)} загрузок. Поддержка версий: ${pack.game_versions?.slice(0, 3).join(', ')}.`
     
+    const url = siteCanonical(`/datapack/${params.slug}`)
     return {
       title: `${pack.title} - Майнкрафт Датапак`,
       description: fullDescription,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
+        ...(url ? { url } : {}),
         title: `${pack.title} - Майнкрафт Датапак`,
         description: pack.description,
         images: pack.icon_url ? [{ url: pack.icon_url }] : [],
@@ -37,7 +42,7 @@ export async function generateMetadata({ params }) {
     }
   } catch {
     return {
-      title: 'Датапак не найден | ModrinthProxy',
+      title: `Датапак не найден | ${SITE_NAME}`,
       description: 'Запрашиваемый датапак не найден',
     }
   }

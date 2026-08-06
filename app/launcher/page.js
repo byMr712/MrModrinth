@@ -1,6 +1,9 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import DownloadButtons from './DownloadButtons'
 import LauncherVersions from './LauncherVersions'
-import LauncherLastUpdate from './LauncherLastUpdate'
 import DetectedOS from './DetectedOS'
 import { DownloadSection } from './download-section-replacement'
 import { getLauncherData } from '@/lib/launcher'
@@ -180,24 +183,9 @@ export default async function AppPage() {
         </div>
 
         <div className="feature gradient-border bg-gradient-to-br from-gray-900/50 to-gray-800/30 rounded-3xl p-8 border border-gray-700/50 shadow-2xl">
-          <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
-            modrinth.black is an independent project and has no relation to the original Modrinth and Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth App belong to Rinth, Inc.
+          <p className="text-sm text-gray-600 dark:text-gray-400 text-center max-w-3xl mx-auto">
+            MrModrinth is an independent project and has no relation to the original Modrinth and Rinth, Inc. Modrinth App is a product of Rinth, Inc. All rights to Modrinth App belong to Rinth, Inc.
           </p>
-          <p className="text-sm text-gray-600 dark:text-gray-400 text-center mb-4 max-w-3xl mx-auto">
-            Все ссылки для скачивания берутся напрямую с официальных серверов Modrinth.
-            <br />
-            Подробнее о проекте:{' '}
-            <a href="/bmadnco" className="text-modrinth-green hover:underline">
-              Как это работает
-            </a>
-          </p>
-
-          <div className="mt-6 flex flex-col items-center gap-2">
-            <span className="text-xs font-semibold uppercase tracking-wider text-gray-500">
-              RAW API
-            </span>
-            <LauncherLastUpdate launcherData={launcherData} astralData={astralData} />
-          </div>
         </div>
       </div>
     </div>

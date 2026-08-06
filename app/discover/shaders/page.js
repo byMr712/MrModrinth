@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { redirect } from 'next/navigation'
 import { buildCatalogSearchMetadata } from '@/lib/catalogSearchSeo'
 import { searchMods, getMinecraftVersions } from '@/lib/modrinth'
@@ -245,14 +249,6 @@ export default async function ShadersPage({ searchParams }) {
         </>
       ) : (
         <>
-          <CatalogPagination
-            page={page}
-            totalPages={totalPages}
-            pathname="/discover/shaders"
-            searchParams={searchParams}
-            className="mb-6"
-          />
-
           <ResourceList resources={data.hits} type="shader" />
 
           <CatalogPagination

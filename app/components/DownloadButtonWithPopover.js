@@ -1,8 +1,12 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 'use client'
 
 import * as Popover from '@radix-ui/react-popover'
 import { useState, useRef } from 'react'
-import { DownloadIcon, PirateIcon } from './icons'
+import { DownloadIcon } from './icons'
 
 export default function DownloadButtonWithPopover({ 
   buttonText,
@@ -61,7 +65,7 @@ export default function DownloadButtonWithPopover({
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >
-          <div className="flex items-center gap-3 text-white">
+          <div className="flex items-center justify-center gap-3 text-white text-center">
             <a
               href={officialUrl}
               target="_blank"
@@ -75,16 +79,9 @@ export default function DownloadButtonWithPopover({
               href={pirateUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-modrinth-green hover:underline text-sm relative group flex items-center gap-1.5 focus:outline-none outline-none"
+              className="text-modrinth-green hover:underline text-sm focus:outline-none outline-none"
             >
-              <PirateIcon className="w-4 h-4" />
-              Пиратская
-              <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 px-2 py-1 text-white text-xs rounded opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none whitespace-nowrap z-50 border border-gray-700"
-                   style={{ backgroundColor: 'var(--bg-gradient-start)' }}>
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 translate-y-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent"
-                     style={{ borderTopColor: 'var(--bg-gradient-start)' }}></div>
-                Позволяет играть в оффлайн режиме
-              </div>
+              Хочу без лицензии
             </a>
           </div>
           <Popover.Arrow className="fill-[var(--bg-gradient-start)]" />

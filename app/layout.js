@@ -1,21 +1,22 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import './globals.css'
 import { Nunito } from "next/font/google"
 import Script from 'next/script'
 import { Suspense } from 'react'
-import Link from 'next/link'
 import { ThemeProvider } from 'next-themes'
 import MobileNav from './components/MobileNav'
 import Navigation from './components/Navigation'
-import TopNav from "./components/TopNav"
-import Footer from './components/Footer'
 import Logo from './components/Logo'
 import VersionsPreloader from './components/VersionsPreloader'
 import AppTooltipProvider from './components/AppTooltipProvider'
-import ExtensionBanner from './components/ExtensionBanner'
 import AppSettingsSync from './components/AppSettingsSync'
 import CatalogReturnLifecycle from './components/CatalogReturnLifecycle'
 import { PALETTES } from '../lib/paletteManager'
 import { CHUNK_LOAD_RECOVERY_INLINE } from '../lib/chunkLoadRecoveryInline'
+import { SITE_NAME, METRIKA_ID } from '../lib/siteConfig'
 
 const nunito = Nunito({
   subsets: ['latin', 'cyrillic'],
@@ -28,7 +29,7 @@ const nunito = Nunito({
 })
 
 export const metadata = {
-  title: 'ModrinthProxy',
+  title: SITE_NAME,
   description: 'Удобный поиск и скачивание модов, плагинов, шейдеров для Minecraft на русском языке',
   manifest: '/manifest.json',
   icons: {
@@ -43,7 +44,7 @@ export const viewport = {
   maximumScale: 1,
   userScalable: false,
   viewportFit: 'cover',
-  themeColor: '#ec7fab',
+  themeColor: '#1bd96a',
 }
 
 const POSTERITY_COMMENT_BODY = ` _    _ 
@@ -80,9 +81,6 @@ export default function RootLayout({ children }) {
                 if (localStorage.getItem('project-sidebar-left') === 'true') {
                   document.documentElement.classList.add('project-sidebar-left');
                 }
-                if (localStorage.getItem('show-disclaimer-badge') === 'false') {
-                  document.documentElement.classList.add('hide-disclaimer-badge');
-                }
                 (function() {
                   var p = localStorage.getItem('color-palette') || 'pink';
                   var m = ${JSON.stringify(activeColorPalettesStoreDisclaimerUpdate)};
@@ -101,15 +99,17 @@ export default function RootLayout({ children }) {
         <link rel="apple-touch-icon" href="/icon.png?v=2" />
         <meta name="mobile-web-app-capable" content="yes" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-        <Script id="yandex-metrika" strategy="afterInteractive">
-          {`(function(m,e,t,r,i,k,a){
-            m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
-            m[i].l=1*new Date();
-            for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
-            k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
-          })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=105182235', 'ym');
-          ym(105182235, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});`}
-        </Script>
+        {METRIKA_ID ? (
+          <Script id="yandex-metrika" strategy="afterInteractive">
+            {`(function(m,e,t,r,i,k,a){
+              m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+              m[i].l=1*new Date();
+              for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+              k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)
+            })(window, document,'script','https://mc.yandex.ru/metrika/tag.js?id=${METRIKA_ID}', 'ym');
+            ym(${METRIKA_ID}, 'init', {ssr:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});`}
+          </Script>
+        ) : null}
         <Script id="console-devtools-hint" strategy="afterInteractive">
           {`(function(){
   function warn(){
@@ -134,12 +134,13 @@ export default function RootLayout({ children }) {
           <AppTooltipProvider>
           <AppSettingsSync />
           <CatalogReturnLifecycle />
-          <noscript dangerouslySetInnerHTML={{ __html: '<div><img src="https://mc.yandex.ru/watch/105182235" style="position:absolute; left:-9999px;" alt="" /></div>' }} />
+          {METRIKA_ID ? (
+            <noscript dangerouslySetInnerHTML={{ __html: `<div><img src="https://mc.yandex.ru/watch/${METRIKA_ID}" style="position:absolute; left:-9999px;" alt="" /></div>` }} />
+          ) : null}
           <VersionsPreloader />
-          <TopNav />
           <nav className="relative z-10 hidden lg:block">
             <div className="container mx-auto px-4 py-3 md:py-4">
-              <div className="flex min-w-0 items-center gap-4 md:gap-6">
+              <div className="flex min-w-0 items-center justify-center gap-4 md:gap-6">
                 <Suspense fallback={<div className="w-9 h-9 flex-shrink-0"></div>}>
                   <Logo />
                 </Suspense>
@@ -147,21 +148,10 @@ export default function RootLayout({ children }) {
               </div>
             </div>
           </nav>
-          <div className="relative z-10 flex justify-center pb-2 -mt-1 rounded-b-2xl pt-[5px]">
-            <div className="disclaimer-badge">
-              <svg className="w-3 h-3 flex-shrink-0 relative z-10" fill="currentColor" viewBox="0 0 20 20">
-                <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
-              </svg>
-              <span className="relative z-10">Unofficial site, not affiliated with modrinth.com.</span>
-              <Link href="/bmadnco" className="relative z-10 font-semibold transition-colors duration-200">What is this?</Link>
-            </div>
-          </div>
           <main className="container">
             {children}
           </main>
           <MobileNav />
-          <Footer />
-          <ExtensionBanner />
           </AppTooltipProvider>
         </ThemeProvider>
       </body>

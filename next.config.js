@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   sw: 'sw-v2.js',
@@ -73,7 +77,15 @@ const nextConfig = {
     return [
       { source: '/app', destination: '/launcher' },
       { source: '/app/', destination: '/launcher' },
-      { source: '/file-lookup', destination: '/admin/file_lookup' },
+      { source: '/file-lookup', destination: '/whothisfile' },
+      {
+        source: '/versions/:path*',
+        destination: 'https://launcher-files.modrinth.com/versions/:path*',
+      },
+      {
+        source: '/data/:path*',
+        destination: 'https://cdn.modrinth.com/data/:path*',
+      },
     ]
   },
   images: {
