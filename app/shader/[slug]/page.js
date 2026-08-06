@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getTeamMembers, getOrganization } from '@/lib/modrinth'
@@ -6,21 +10,22 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ContentNavigation from '@/app/components/ContentNavigation'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import MarkdownContent from '@/app/components/MarkdownContent'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
     const shader = await getMod(params.slug)
-    const url = `https://modrinth.black/shader/${params.slug}`
     const fullDescription = shader.description || `Скачать ${shader.title} для Minecraft. ${formatDownloads(shader.downloads)} загрузок. Поддержка версий: ${shader.game_versions?.slice(0, 3).join(', ')}.`
     
+    const url = siteCanonical(`/shader/${params.slug}`)
     return {
       title: `${shader.title} - Майнкрафт Шейдер`,
       description: fullDescription,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
+        ...(url ? { url } : {}),
         title: `${shader.title} - Майнкрафт Шейдер`,
         description: shader.description,
         images: shader.icon_url ? [{ url: shader.icon_url }] : [],
@@ -37,7 +42,7 @@ export async function generateMetadata({ params }) {
     }
   } catch {
     return {
-      title: 'Шейдер не найден | ModrinthProxy',
+      title: `Шейдер не найден | ${SITE_NAME}`,
       description: 'Запрашиваемый шейдер не найден',
     }
   }

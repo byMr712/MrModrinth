@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { redirect } from 'next/navigation'
 import { SERVER_TYPES, SERVER_FEATURES, SERVER_GAMEPLAY, SERVER_CONFIG, SERVER_COMMUNITY } from '@/lib/serverCategories'
 import { searchServers, getMinecraftVersions } from '@/lib/modrinth'
@@ -13,6 +17,7 @@ import CatalogSearchBlockedNote from '@/app/components/CatalogSearchBlockedNote'
 import CatalogPagination from '@/app/components/CatalogPagination'
 import ResourceList from '@/app/components/ResourceList'
 import { buildServerCatalogSeo } from '@/lib/serverCatalogSeo'
+import { SITE_NAME } from '@/lib/siteConfig'
 
 export async function generateMetadata({ searchParams }) {
   const { title, description } = buildServerCatalogSeo({ searchParams })
@@ -22,7 +27,7 @@ export async function generateMetadata({ searchParams }) {
     description,
     robots: 'all',
     openGraph: {
-      siteName: 'modrinth.black',
+      siteName: SITE_NAME,
       title,
       description,
       type: 'website',
@@ -305,14 +310,6 @@ export default async function ServersPage({ searchParams }) {
             </div>
           ) : (
             <>
-              <CatalogPagination
-                page={page}
-                totalPages={totalPages}
-                pathname="/discover/servers"
-                searchParams={searchParams}
-                className="mb-6"
-              />
-
               <ResourceList resources={data.hits} type="server" />
 
               <CatalogPagination

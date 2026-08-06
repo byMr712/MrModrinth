@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import CatalogReturnButton from './CatalogReturnButton'
 import { formatDownloads, resolveModrinthProjectAccent, pruneVersionsForDownloadPicker, slimVersionsForHeader } from '@/lib/modrinth'
@@ -9,7 +13,7 @@ import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shader
 import { IconModrinthAppPlays } from '@/lib/icons'
 import DownloadModal from './DownloadModal'
 import MobileDownloadButton from './MobileDownloadButton'
-import MinePluginCheckPromo, { DownloadPromoConnector } from './MinePluginCheckPromo'
+import { DownloadPromoConnector } from './MinePluginCheckPromo'
 import AuthorPluginPromo from './AuthorPluginPromo'
 import PlayServerSection from './PlayServerSection'
 import StyledTooltip from './StyledTooltip'
@@ -90,9 +94,7 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
   const showAuthorPluginPromo =
     showDownloadPromoSlot && contentType === 'plugin' && AUTHOR_PLUGIN_SLUGS.has(resource.slug)
 
-  const showMinePluginCheckPromo = showDownloadPromoSlot && !showAuthorPluginPromo
-
-  const showPromoBelowDownload = showMinePluginCheckPromo || showAuthorPluginPromo
+  const showPromoBelowDownload = showAuthorPluginPromo
 
   const iconUrl = resource.icon_url ? filterAvatar(resource.icon_url) : null
 
@@ -290,11 +292,6 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
         {showAuthorPluginPromo && (
           <div className="mt-5 w-full min-w-0 lg:mt-4">
             <AuthorPluginPromo />
-          </div>
-        )}
-        {showMinePluginCheckPromo && (
-          <div className="mt-5 w-full min-w-0 lg:mt-4">
-            <MinePluginCheckPromo contentType={contentType} />
           </div>
         )}
         </div>

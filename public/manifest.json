@@ -1,5 +1,5 @@
 {
-  "name": "ModrinthProxy",
+  "name": "MrModrinth",
   "short_name": "Modrinth",
   "description": "Удобный поиск и скачивание модов, плагинов, шейдеров для Minecraft",
   "start_url": "/",
@@ -22,4 +22,3 @@
     }
   ]
 }
-

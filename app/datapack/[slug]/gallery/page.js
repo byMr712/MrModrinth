@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getOrganization } from '@/lib/modrinth'
@@ -7,25 +11,26 @@ import ResourceSidebar from '@/app/components/ResourceSidebar'
 import ResourceHeader from '@/app/components/ResourceHeader'
 import GalleryGrid from '@/app/components/GalleryGrid'
 import IconPreload from '@/app/components/IconPreload'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
     const pack = filterModContent(await getMod(params.slug))
-    const url = `https://modrinth.black/datapack/${params.slug}/gallery`
+    const url = siteCanonical(`/datapack/${params.slug}/gallery`)
     return {
-      title: `${pack.title} - Галерея | ModrinthProxy`,
+      title: `${pack.title} - Галерея | ${SITE_NAME}`,
       description: `Просмотрите галерею изображений для ${pack.title}`,
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
-        title: `${pack.title} - Галерея | ModrinthProxy`,
+        ...(url ? { url } : {}),
+        title: `${pack.title} - Галерея | ${SITE_NAME}`,
         description: `Просмотрите галерею изображений для ${pack.title}`,
         images: pack.icon_url ? [{ url: pack.icon_url }] : [],
       },
       twitter: {
         card: 'summary',
-        title: `${pack.title} - Галерея | ModrinthProxy`,
+        title: `${pack.title} - Галерея | ${SITE_NAME}`,
         description: `Просмотрите галерею изображений для ${pack.title}`,
         images: pack.icon_url ? [pack.icon_url] : [],
       },

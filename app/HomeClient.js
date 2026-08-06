@@ -1,6 +1,11 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 'use client'
 import Link from 'next/link'
 import { useEffect, useMemo, useState } from 'react'
+import { SITE_NAME } from '@/lib/siteConfig'
 import { useMinecraftVersions } from './hooks/useMinecraftVersions'
 import { buildHomeModsVersionCopy } from '@/lib/minecraftVersionRange'
 
@@ -80,7 +85,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
           <div className="max-w-7xl mx-auto px-2 sm:px-4 text-center">
           <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl xl:text-8xl font-black mb-3 sm:mb-4 md:mb-6 animate-fade-in-up animation-delay-200 px-2 sm:px-4">
               <span className="text-gray-900 dark:text-white drop-shadow-2xl">
-              ModrinthProxy
+              {SITE_NAME}
             </span>
           </h1>
            
@@ -141,7 +146,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 Прямой доступ к Modrinth
               </h3>
               <p className="text-gray-300 text-lg mb-6">
-                ModrinthProxy использует официальный API Modrinth для получения актуальной информации о проектах и файлах.
+                MrModrinth использует официальный API Modrinth для получения актуальной информации о проектах и файлах.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
@@ -282,7 +287,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 Совместимость с любыми загрузчиками
               </h3>
               <p className="text-gray-300 text-lg mb-6">
-                ModrinthProxy поддерживает все популярные загрузчики модов и версии Minecraft.
+                MrModrinth поддерживает все популярные загрузчики модов и версии Minecraft.
               </p>
               <div className="space-y-4">
                 <div className="flex items-start gap-3">
@@ -331,7 +336,7 @@ export default function HomeClient({ platformStats, categoryTotals }) {
                 Поддержка всех серверных платформ
               </h3>
               <p className="text-gray-300 text-lg mb-6">
-                ModrinthProxy поддерживает плагины для всех популярных серверных платформ Minecraft.
+                MrModrinth поддерживает плагины для всех популярных серверных платформ Minecraft.
               </p>
               <div className="space-y-4">
                 <div className="flex items-center gap-3">

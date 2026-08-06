@@ -1,5 +1,9 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { notFound, redirect } from 'next/navigation'
-import { getMod } from '@/lib/modrinth'
+import { getMod, getServer } from '@/lib/modrinth'
 import { isProjectBlocked, isOrganizationBlocked } from '@/lib/contentFilter'
 import { resolveProjectHref } from '@/lib/dependencies'
 
@@ -10,7 +14,11 @@ export default async function ProjectRedirectPage({ params }) {
   try {
     project = await getMod(slug)
   } catch {
-    notFound()
+    try {
+      project = await getServer(slug)
+    } catch {
+      redirect('/')
+    }
   }
 
   if (isProjectBlocked(project.slug, project.id) || isOrganizationBlocked(project.organization)) {

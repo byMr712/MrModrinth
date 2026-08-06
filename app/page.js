@@ -1,11 +1,16 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import HomeClient from './HomeClient'
 import {
   getModrinthPlatformStatistics,
   getModrinthProjectTypeTotals,
 } from '@/lib/modrinthCatalogTotals'
+import { SITE_NAME } from '@/lib/siteConfig'
 
 export const metadata = {
-  title: 'ModrinthProxy',
+  title: SITE_NAME,
   description: 'Скачать моды, плагины, шейдеры, ресурспаки и датапаки для Minecraft. Удобный каталог на русском языке. Тысячи модификаций для любой версии.',
 }
 

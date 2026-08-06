@@ -1,7 +1,12 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
+import { SITE_NAME } from '@/lib/siteConfig'
 import Link from 'next/link'
 
 export const metadata = {
-  title: '404 - Страница не найдена | ModrinthProxy',
+  title: `404 - Страница не найдена | ${SITE_NAME}`,
   description: 'Запрашиваемая страница не найдена',
 }
 

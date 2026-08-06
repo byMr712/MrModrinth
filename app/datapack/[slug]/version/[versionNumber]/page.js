@@ -1,7 +1,12 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { notFound } from 'next/navigation'
 import { getMod, getModVersions, getUser } from '@/lib/modrinth'
 import { filterModContent } from '@/lib/contentFilter'
 import VersionPage from '@/app/components/VersionPage'
+import { SITE_NAME, siteCanonical } from '@/lib/siteConfig'
 
 export async function generateMetadata({ params }) {
   try {
@@ -11,17 +16,17 @@ export async function generateMetadata({ params }) {
     
     if (!version) throw new Error('Version not found')
     
-    const url = `https://modrinth.black/datapack/${params.slug}/version/${params.versionNumber}`
     const description = version.changelog ? version.changelog.slice(0, 150) : `Скачать версию ${version.version_number} датапака ${datapack.title}`
     
+    const url = siteCanonical(`/datapack/${params.slug}/version/${params.versionNumber}`)
     return {
       title: `${version.version_number} - ${datapack.title}`,
       description: description,
       robots: 'all',
       openGraph: {
-        siteName: 'modrinth.black',
+        siteName: SITE_NAME,
         type: 'website',
-        url: url,
+        ...(url ? { url } : {}),
         title: `${version.version_number} - ${datapack.title}`,
         description: version.changelog ? version.changelog.slice(0, 150) : datapack.description,
         images: datapack.icon_url ? [{ url: datapack.icon_url }] : [],
@@ -38,7 +43,7 @@ export async function generateMetadata({ params }) {
     }
   } catch {
     return {
-      title: 'Версия не найдена | ModrinthProxy',
+      title: `Версия не найдена | ${SITE_NAME}`,
       description: 'Запрашиваемая версия не найдена',
     }
   }

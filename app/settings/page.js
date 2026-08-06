@@ -1,8 +1,13 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
+import { SITE_NAME } from '@/lib/siteConfig'
 import SettingsClient from './SettingsClient'
 
 export const metadata = {
-  title: 'Настройки сайта | ModrinthProxy',
-  description: 'Настройте поведение и внешний вид сайта ModrinthProxy под ваши предпочтения на этом устройстве.',
+  title: `Настройки сайта | ${SITE_NAME}`,
+  description: 'Настройте поведение и внешний вид сайта MrModrinth под ваши предпочтения на этом устройстве.',
   robots: 'noindex, nofollow'
 }
 

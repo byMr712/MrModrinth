@@ -1,8 +1,15 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { searchMods } from '@/lib/modrinth'
+import { SITE_ORIGIN } from '@/lib/siteConfig'
 
 export default async function sitemap() {
-  const baseUrl = 'https://modrinth.black'
-  
+  if (!SITE_ORIGIN) return []
+
+  const baseUrl = SITE_ORIGIN
+
   const routes = [
     '',
     '/mods',
@@ -13,10 +20,7 @@ export default async function sitemap() {
     '/modpacks',
     '/servers',
     '/discover/servers',
-    '/news',
-    '/extension',
-    '/bmadnco',
-    '/protect-bot',
+    '/whothisfile',
   ]
 
   const staticPages = routes.map((route) => ({

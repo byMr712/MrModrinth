@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 export const WindowsIcon = ({ className = "w-12 h-12 mb-4" }) => (
 	<svg className={className} viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
 		<g fillRule="evenodd">

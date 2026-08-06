@@ -1,3 +1,7 @@
+// modrinth-proxy
+// Original Copyright (C) 2025-2026 БоБоБо
+// Modifications Copyright (C) 2026 Mr712
+// Licensed under AGPL-3.0-or-later
 import { NextResponse } from 'next/server'
 
 export async function GET() {
@@ -6,7 +10,7 @@ export async function GET() {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Сайт недоступен - ModrinthProxy</title>
+    <title>Сайт недоступен - MrModrinth</title>
     <meta name="description" content="Сайт временно недоступен. Инструкции по решению проблемы.">
     <style>
         * {
@@ -284,8 +288,8 @@ export async function GET() {
                 Если основной сайт недоступен, вы можете запустить собственную копию:
             </p>
             <div class="code-block">
-                <div class="command">git clone https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy.git</div>
-                <div class="command">cd modrinth-proxy</div>
+                <div class="command">git clone https://github.com/byMr712/MrModrinth.git</div>
+                <div class="command">cd MrModrinth</div>
                 <div class="command">npm install</div>
                 <div class="command">npm run dev</div>
             </div>
