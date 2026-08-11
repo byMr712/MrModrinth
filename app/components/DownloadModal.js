@@ -691,7 +691,7 @@ export default function DownloadModal({ mod, versions, contentType = 'mods', mut
           type="button"
           onClick={() => setIsOpen(true)}
           data-download-modal
-          className={`modrinth-download-button w-full lg:w-auto text-base${
+          className={`modrinth-download-button w-full text-base${
             muted ? ' modrinth-download-button--muted' : accent ? ' hover:!brightness-[1.08]' : ''
           }`}
           style={downloadBtnAccentStyle}

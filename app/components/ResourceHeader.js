@@ -13,6 +13,7 @@ import { SHADER_STYLES, SHADER_FEATURES, SHADER_PERFORMANCE } from '@/lib/shader
 import { IconModrinthAppPlays } from '@/lib/icons'
 import DownloadModal from './DownloadModal'
 import MobileDownloadButton from './MobileDownloadButton'
+import ShareMrModrinthButton from './ShareMrModrinthButton'
 import { DownloadPromoConnector } from './MinePluginCheckPromo'
 import AuthorPluginPromo from './AuthorPluginPromo'
 import PlayServerSection from './PlayServerSection'
@@ -244,13 +245,20 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
               <>
                 <div className="w-full lg:flex lg:flex-col lg:items-end lg:gap-2">
                   {showPromoBelowDownload ? (
-                    <div className="flex flex-col items-center gap-2 lg:inline-flex lg:gap-2">
+                    <div className="flex flex-col items-center gap-2 lg:w-full lg:inline-flex lg:gap-2">
                       <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                       <DownloadPromoConnector className="hidden lg:flex pb-px" />
                     </div>
                   ) : (
                     <DownloadModal mod={resource} versions={downloadVersions} contentType={contentTypeRoute} muted={mutedDownload} />
                   )}
+                  <ShareMrModrinthButton
+                    resource={resource}
+                    contentType={contentType}
+                    accent={downloadAccent}
+                    muted={mutedDownload}
+                    className="hidden lg:inline-flex"
+                  />
 
                 <div className="mt-3 w-full lg:mt-0">
                   <div className="flex w-full items-center justify-between gap-3 lg:hidden">
@@ -273,14 +281,23 @@ export default function ResourceHeader({ resource, contentType, versions = [], m
                       )}
                     </div>
 
-                    {showPromoBelowDownload ? (
-                      <div className="flex shrink-0 flex-col items-center gap-1">
+                    <div className="flex shrink-0 flex-col items-center gap-2">
+                      {showPromoBelowDownload ? (
+                        <div className="flex flex-col items-center gap-1">
+                          <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
+                          <DownloadPromoConnector />
+                        </div>
+                      ) : (
                         <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
-                        <DownloadPromoConnector />
-                      </div>
-                    ) : (
-                      <MobileDownloadButton accent={downloadAccent} resourceTitle={resource.title} muted={mutedDownload} />
-                    )}
+                      )}
+                      <ShareMrModrinthButton
+                        resource={resource}
+                        contentType={contentType}
+                        accent={downloadAccent}
+                        muted={mutedDownload}
+                        className="flex lg:hidden"
+                      />
+                    </div>
                   </div>
                 </div>
                 </div>

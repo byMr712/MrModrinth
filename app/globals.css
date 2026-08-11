@@ -1447,7 +1447,7 @@ button.text-white {
   flex-direction: row;
   gap: 0.5rem;
   height: 3rem;
-  justify-content: center;
+  justify-content: flex-start;
   min-width: auto;
   padding: 0.75rem calc(1rem - 0.125rem);
   transition: scale 0.125s ease-in-out, background-color 0.25s ease-in-out, color 0.25s ease-in-out, filter 0.25s ease-in-out;
@@ -1536,6 +1536,69 @@ html:not(.dark) .gradle-code .gradle-punct {
   width: 1.5rem;
   height: 1.5rem;
   stroke-width: 2.5;
+}
+
+.share-modrinth-button {
+  align-items: center;
+  background-color: var(--color-green);
+  border: 2px solid transparent;
+  border-radius: 1rem;
+  box-shadow: inset 0 0 0 transparent;
+  color: #fff;
+  cursor: pointer;
+  flex-direction: row;
+  gap: 0.5rem;
+  height: 3rem;
+  justify-content: center;
+  min-width: auto;
+  padding: 0.75rem calc(1rem - 0.125rem);
+  transition: scale 0.125s ease-in-out, background-color 0.25s ease-in-out, color 0.25s ease-in-out, filter 0.25s ease-in-out;
+  white-space: nowrap;
+}
+
+.share-modrinth-button:hover {
+  scale: 1.02;
+  filter: brightness(1.08);
+}
+
+.share-modrinth-button:active {
+  scale: 0.95;
+}
+
+.share-modrinth-button svg {
+  width: 1.5rem;
+  height: 1.5rem;
+  stroke-width: 2.5;
+}
+
+.share-modrinth-button--muted {
+  background-color: var(--bg-tertiary, #2d2d2d);
+  border-color: var(--border-color, #404040);
+  color: var(--text-secondary, #c0c0c0);
+  font-weight: 600;
+  font-variation-settings: 'wght' 600;
+  box-shadow: none;
+}
+
+.share-modrinth-button--muted:hover {
+  filter: brightness(1.08);
+  scale: 1.01;
+}
+
+.share-toast {
+  --share-accent: var(--color-green);
+  background-color: var(--bg-secondary);
+  border-color: color-mix(in srgb, var(--share-accent) 45%, transparent);
+  color: var(--text-primary);
+}
+
+.share-toast .share-toast-check {
+  color: var(--share-accent);
+  background-color: color-mix(in srgb, var(--share-accent) 16%, transparent);
+}
+
+.share-toast .share-toast-url {
+  color: var(--text-muted);
 }
 
 input[type="text"],
