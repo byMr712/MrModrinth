@@ -1,78 +1,83 @@
 # MrModrinth
 
-**This is a fork of the [modrinth-proxy](https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0/modrinth-proxy) project.**
+> **Language:** Русский · [English](README.en.md)
 
-**Original author:** [БоБоБо](https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0)
+**Это форк проекта [modrinth-proxy](https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0).**
 
-**License:** [GNU Affero General Public License v3](LICENSE)
+**Оригинальный автор:** [БоБоБо](https://github.com/b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0b0)
 
-Modrinth's web interface in Russian. Easy access to mods, plugins, shaders, and other Minecraft content without a VPN or any hassle.
+**Лицензия:** [GNU Affero General Public License v3](LICENSE)
 
-All files are downloaded directly from Modrinth's CDN.
+Веб-интерфейс Modrinth на русском языке. Удобный доступ к модам, плагинам, шейдерам и другому контенту для Minecraft без VPN и лишних сложностей.
 
-## For rights holders
+Все файлы загружаются напрямую из CDN Modrinth.
 
-> **No drama — your work has not been stolen.** We're just a **small proxy** in front of a great platform, and anyone can run this on their own PC or virtual server.
+## Пример интерфейса моего форка
+![Интерфейс](/images/MrModrinth.png)
+
+## Пример интерфейса оригинального репозитория
+![Интерфейс](/images/BlackModrinth.png)
+
+## Для правообладателей
+
+> **Без паники — ваши работы не были украдены.** Мы — всего лишь **небольшой прокси-сервис**, работающий поверх отличной платформы; любой желающий может запустить его на своем ПК или виртуальном сервере.
 >
-> We simply can't build the same kind of payment system Modrinth has — royalties for views and downloads require infrastructure way beyond what we can realistically run. And to be clear: **we make absolutely nothing from this project.** No money from traffic, no money from downloads — we don't even have servers to pay for, because this tool runs locally on your own machine or infrastructure.
+> Мы просто не в состоянии создать такую ​​же систему выплат, как у Modrinth: для начисления роялти за просмотры и скачивания требуется инфраструктура, масштабы которой выходят далеко за рамки наших возможностей. И сразу уточним: **мы ровным счетом ничего не зарабатываем на этом проекте.** Никаких денег с трафика или скачиваний — нам даже не нужно оплачивать серверы, так как этот инструмент запускается локально на вашем компьютере или вашей инфраструктуре.
 
-# Local development
-### Clone the repository
-```bash 
+# Локальная разработка
+### Клонирование репозитория
+```bash
 git clone https://github.com/byMr712/MrModrinth.git
 ```
-### Go to the project folder
-```bash 
+### Переход в папку проекта
+```bash
 cd MrModrinth
 ```
-### Installing dependencies
-```bash 
+### Установка зависимостей
+```bash
 npm install
 ```
 
-## Start
-Start the `start-MrModrinth.bat` file in the project folder.
+## Запуск
+Запустите файл `start-MrModrinth.bat`, находящийся в папке проекта.
 
-The site will be available at `http://localhost:3000`. All requests to the Modrinth API will originate from your IP address, so you will have your own rate limit.
+Сайт будет доступен по адресу `http://localhost:3000`. Все запросы к API Modrinth будут идти с вашего IP-адреса, поэтому для вас будут действовать собственные лимиты запросов (rate limits).
 
-## Stop
-Stop the `stop-MrModrinth.bat` file in the project folder.
-
-#Redirection
-Redirects from the official Modrinth website to your local one are supported. To set this up, install the "[Redirector](https://chromewebstore.google.com/detail/redirector/lioaeidejmlpffbndjhaameocfldlhin)" Chrome extension and add a rule as shown in the photo below.
+## Остановка
+Запустите файл `stop-MrModrinth.bat`, находящийся в папке проекта. # Перенаправление
+Поддерживается перенаправление с официального сайта Modrinth на ваш локальный экземпляр. Для настройки установите расширение для Chrome «[Redirector](https://chromewebstore.google.com/detail/redirector/lioaeidejmlpffbndjhaameocfldlhin)» и добавьте правило, как показано на изображении ниже.
 
 <details>
-<summary>🖼️ Click to show the photo</summary>
+<summary>🖼️ Нажмите, чтобы посмотреть изображение</summary>
 
-<img src="https://raw.githubusercontent.com/byMr712/MrModrinth/master/screenshot.png" alt="Screenshot">
+<img src="https://raw.githubusercontent.com/byMr712/MrModrinth/master/screenshot.png" alt="Скриншот">
 
 </details>
 
-### Match URL
+### URL для сопоставления (Match URL)
 ```bash
 ^(?:https?://)(?:[a-z0-9-]+\.)*modrinth\.com(.*)
 ```
 
-### Redirect To
+### URL перенаправления (Redirect To)
 ```bash
 http://localhost:3000$1
 ```
 
-### Test URL
+### Тестовый URL
 ```bash
 https://modrinth.com/mod/sodium
 ```
 
-# Caching
-API requests are cached using the built-in Next.js system (`revalidate`):
-- Minecraft servers: 180 seconds (3 minutes)
-- Project search: 10,800 seconds (3 hours)
-- Project/mod details: 60 seconds (1 minute)
-- Project versions: 21,600 seconds (6 hours)
-- Version details: 21,600 seconds (6 hours)
-- Project team: 86,400 seconds (24 hours)
-- Users: 43,200 seconds (12 hours)
-- Minecraft versions: 86,400 seconds (24 hours)
-- Categories: 604,800 seconds (7 days)
-- Project count on homepage: 86,400 seconds (24 hours)
-
+# Кэширование
+Запросы к API кэшируются с использованием встроенной системы Next.js (`revalidate`):
+- Серверы Minecraft: 180 секунд (3 минуты)
+- Поиск проектов: 10 800 секунд (3 часа)
+- Информация о проекте/моде: 60 секунд (1 минута)
+- Версии проекта: 21 600 секунд (6 часов)
+- Информация о версии: 21 600 секунд (6 часов)
+- Команда проекта: 86 400 секунд (24 часа)
+- Пользователи: 43 200 секунд (12 часов)
+- Версии Minecraft: 86 400 секунд (24 часа)
+- Категории: 604 800 секунд (7 дней)
+- Количество проектов на главной странице: 86 400 секунд (24 часа)
